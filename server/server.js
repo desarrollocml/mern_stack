@@ -14,10 +14,17 @@ const Coaster = require("./Models/Coaster.model");
 app.get("/", (req, res) =>
   res.json([{ mesagge: "hola json" }, { mesagge: "hola json2" }])
 );
-app.get('/api/coasters',(req,res)=>{
-    Coaster
-        .find()
-        .then(allCoasters=>res.json(allCoasters))
-})
+app.get("/api/coasters", (req, res) => {
+  Coaster
+  .find()
+  .then((allCoasters) => res.json(allCoasters));
+});
+app.get("/api/details/:coaster_id", (req, res) => {
+  const { coaster_id } = req.params;
+  Coaster
+  .findById(coaster_id)
+  .then(coaster=>res.json(coaster))
+  
+});
 
 app.listen(5005, () => console.log("SERVIDOR LEVANTADO"));
